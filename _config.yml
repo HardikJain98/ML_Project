@@ -1,4 +1,4 @@
-title: Attrition Avoidance
-description: An end-to-end Machine Learning Pipeline encompassing identification, reasoning, and avoidance of attrition amongst employees.
+title: Core Temperature Estimation of Electric Vehicle Battery Packs
+description: An end-to-end Machine Learning Pipeline to estimate the core temperature of Electric Vehicle Battery Packs
 #theme: just-the-docs
 remote_theme: pmarsceill/just-the-docs
