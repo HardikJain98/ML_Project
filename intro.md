@@ -5,6 +5,7 @@ permalink: /
 nav_order: 1
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
 
 ## Problem Definition and Motivation
 <br/>

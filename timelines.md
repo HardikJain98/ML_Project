@@ -5,6 +5,8 @@ permalink: /timelines
 nav_order: 8
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## Timelines
 <br/>
 

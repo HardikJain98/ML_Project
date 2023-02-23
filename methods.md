@@ -5,6 +5,8 @@ permalink: /methods
 nav_order: 4
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## Methodology
 <br/>
 

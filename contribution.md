@@ -5,6 +5,8 @@ permalink: /contribution
 nav_order: 7
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## Contribution
 <br/>
 

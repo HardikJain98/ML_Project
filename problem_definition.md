@@ -5,6 +5,8 @@ permalink: /literature_review
 nav_order: 2
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## Literature Review and Novelty
 <br/>
 

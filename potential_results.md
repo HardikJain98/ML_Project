@@ -5,6 +5,8 @@ permalink: /potential_results
 nav_order: 5
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## Potential / Expected Results
 <br/>
 
