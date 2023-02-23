@@ -1,4 +1,4 @@
-title: Core Temperature Estimation of Electric Vehicle Battery Packs
+title: Temp. Estimation of EV Batteries
 description: An end-to-end Machine Learning Pipeline to estimate the core temperature of Electric Vehicle Battery Packs
-#theme: just-the-docs
 remote_theme: pmarsceill/just-the-docs
+color_scheme: dark
