@@ -5,6 +5,8 @@ permalink: /references
 nav_order: 6
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## References
 <br/>
 

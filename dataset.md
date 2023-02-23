@@ -5,6 +5,8 @@ permalink: /dataset
 nav_order: 3
 ---
 
+# Core Temperature Estimation of Electric Vehicle Battery Packs
+
 ## Dataset
 <br/>
 
