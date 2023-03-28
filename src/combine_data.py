@@ -11,19 +11,12 @@
 # python combine_data.py
 
 # Inputs:
-# None, but note relative paths to data files
+# - ../dataset/TripA01.csv ... TripA32.csv, TripB01.csv ... TripB38.csv
 
 # Outputs:
 # - ../dataset/all_trips.csv: containing data from all trips
-# - feature_names.txt: containing the names of all features
-# - missing_data.csv: indicates missing data
-# - histogram.pdf: a nicely styled histogram
-
-# Tested with:
-# - Python 3.7.16
-# - pandas 1.3.5
-# - numpy 1.21.5
-# - matplotlib 3.5.2
+# - ../dataset/original_feature_names.txt: containing the names of all features
+# - ../dataset/missing_data.csv: characterizes which features are missing in which file
 
 ################################################
 #                 Libraries
@@ -33,37 +26,51 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 ################################################
-#                Concatenate Data
+#     Relative Paths to Inputs/Outputs
 ################################################
-# Collection of dataframes from each file
+paths_to_trip_files = ['../dataset/TripA{:02d}.csv'.format(i) for i in range(1, 32+1)] + ['../dataset/TripB{:02d}.csv'.format(i) for i in range(1, 38+1)]
+path_to_all_data = '../dataset/all_trips.csv'
+path_to_feature_list = '../dataset/original_feature_names.txt'
+path_to_missing_data_matrix = '../dataset/missing_data.csv'
+
+################################################
+#         Concatenate Trips Together
+################################################
+# Collection of dataframes from each trip data file
 dfs = []
 
 # Iterate over all files
-filenames = ['../dataset/TripA{:02d}.csv'.format(i) for i in range(1, 32+1)] + ['../dataset/TripB{:02d}.csv'.format(i) for i in range(1, 38+1)]
-for filename in filenames:
+print('Reading in trip data...')
+for filename in paths_to_trip_files:
     # encoding='utf-8', errors='ignore' skips over non-standard characters, e.g. the degree symbol
     with open(filename, encoding='utf-8', errors='ignore') as f:
         df = pd.read_csv(f, delimiter=';')
 
     # add a feature to each datapoint to indicate which file it came from
+    # this feature is a string of the form TripXYY where X = {A, B} and YY is two digits
     df['trip_id'] = filename.split('/')[-1].split('/')[-1].split('.')[0]
 
     # add to collection
     dfs.append(df)
+print('Done reading in data. Concatenating...')
 
 # Concatenate all dataframes into one large dataframe
+# rows correspond to observations, columns correspond to features
 df_concatenated = pd.concat(dfs, axis=0, ignore_index=True)
+print('Concatenated dataset has', df_concatenated.shape[0], 'observations and', df_concatenated.shape[1], 'features.')
 
 ################################################
 #          Save Concatenated Data to CSV
 ################################################
-df_concatenated.to_csv('../dataset/all_trips.csv', index=False)
+print('Saving concatenated dataset to:', path_to_all_data)
+df_concatenated.to_csv(path_to_all_data, index=False)
 
 ################################################
 #      Generate Text File w/ Feature Names
 ################################################
 # Write the column names to a text file, one per line
-with open('feature_names.txt', 'w') as f:
+print('Saving a list of feature names in:', path_to_feature_list)
+with open(path_to_feature_list, 'w') as f:
     for col in df_concatenated.columns:
         f.write(col + '\n')
 
@@ -74,41 +81,25 @@ with open('feature_names.txt', 'w') as f:
 # (i.e. TripA01.csv, ..., Trip A32.csv, TripB01.csv, ..., TripB3.csv)
 # are missing data. The file contains a matrix, where rows correspond
 # to trip data files, and columns correspond to features
-# (there are some 50 features, listed in feature_names.txt).
+# (there are some 50 features, listed in original_feature_names.txt).
 # Entry (i, j) = 1 if file i contains feature j, and 0 otherwise.
 
 # Initialize the results matrix
 results = pd.DataFrame(columns=(['file'] + df_concatenated.columns.to_list()))
 
-# Append the results for each dataframe
-filenames = ['TripA{:02d}.csv'.format(i) for i in range(1, 32+1)] + ['TripB{:02d}.csv'.format(i) for i in range(1, 38+1)]
-for filename, df in zip(filenames, dfs):
+# Concatenate the results for each dataframe
+row_labels = ['TripA{:02d}.csv'.format(i) for i in range(1, 32+1)] + ['TripB{:02d}.csv'.format(i) for i in range(1, 38+1)]
+dfs_list = []
+for filename, df in zip(row_labels, dfs):
     row = {'file': filename}
     for col in results.columns[1:]:
         if col in df.columns:
             row[col] = 1
         else:
             row[col] = 0
-    results = results.append(row, ignore_index=True)
-results.to_csv('missing_data.csv', index=False)
+    dfs_list.append(pd.DataFrame(row, index=[0]))
+results = pd.concat(dfs_list, ignore_index=True)
 
-################################################
-#             Make a Histogram
-################################################
-# Set Up Plot
-plt.rc('text', usetex=True);
-plt.rc('font', family='serif');
-fig, ax = plt.subplots(1, 1, figsize=(12, 6));
-
-# Plot a histogram of the 'Speed' column for all trips
-ax.hist(df_concatenated['Velocity [km/h]'], density=True)
-ax.set_xlabel('Velocity [km/h]')
-ax.set_ylabel('Density')
-ax.set_title('Histogram of Velocity over All Trips')
-plt.yscale('linear')
-
-# Show the plot (blocks execution)
-plt.show()
-
-# # Save image for LaTeX
-fig.savefig('histogram.pdf', format='pdf', bbox_inches='tight');
+# Save to file
+print('Saving a matrix characterizing missing data in:', path_to_missing_data_matrix)
+results.to_csv(path_to_missing_data_matrix, index=False)
