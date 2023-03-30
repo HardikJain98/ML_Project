@@ -29,12 +29,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 ################################################
 #     Relative Paths to Inputs/Outputs
 ################################################
 path_to_all_data_reduced = '../dataset/all_trips_reduced.csv'
 path_to_figs_dir = '../figs/'
+if not os.path.exists(path_to_figs_dir):
+    os.mkdir(path_to_figs_dir)
 
 ################################################
 #         Read In Reduced Data Record

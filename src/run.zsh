@@ -6,7 +6,7 @@ echo "########################################"
 echo "run.zsh: Activating conda environment"
 echo "########################################"
 # running "conda activate ml-project-env" from a shell requires some modification
-source activate ml-project-env
+#source activate ml-project-env
 echo "Done"
 echo ""
 
