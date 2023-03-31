@@ -13,25 +13,25 @@ echo ""
 echo "########################################"
 echo "run.zsh: Combining Trip Data"
 echo "########################################"
-python3 combine_data.py
+python combine_data.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Preprocessing Combined Data"
 echo "########################################"
-python3 preprocess_data.py
+python preprocess_data.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Visualizing Preprocessed Data"
 echo "########################################"
-python3 visualize_data.py
+python visualize_data.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Evaluating Regression Models"
 echo "########################################"
-python3 evaluate_models.py
+python evaluate_models.py
 echo ""
 
 echo "########################################"
