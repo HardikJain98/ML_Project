@@ -13,30 +13,30 @@ echo ""
 echo "########################################"
 echo "run.zsh: Combining Trip Data"
 echo "########################################"
-python combine_data.py
+#python3 combine_data.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Preprocessing Combined Data"
 echo "########################################"
-python preprocess_data.py
+#python3 preprocess_data.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Visualizing Preprocessed Data"
 echo "########################################"
-python visualize_data.py
+#python3 visualize_data.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Evaluating Regression Models"
 echo "########################################"
-python evaluate_models.py
+python3 evaluate_models.py
 echo ""
 
 echo "########################################"
 echo "run.zsh: Deactivating conda environment"
 echo "########################################"
-conda deactivate
+# conda deactivate
 echo "Done"
 echo ""
