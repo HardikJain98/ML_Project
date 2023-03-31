@@ -24,11 +24,12 @@
 import pandas as pd
 import numpy as np
 from sklearn import linear_model, preprocessing
+from sklearn.metrics import r2_score, mean_absolute_percentage_error, mean_absolute_error
 
 ################################################
 #                  evaluate
 ################################################
-def evaluate(y_test, y_test_pred):
+def evaluate(y_test, y_test_pred, features):
     """
     Function to evaluate regression model performance
     This is common to all models.
@@ -42,13 +43,22 @@ def evaluate(y_test, y_test_pred):
     """
 
     # calculate mean absolute error
-    mae = np.mean(np.abs(y_test - y_test_pred))
+    mae = mean_absolute_error(y_test, y_test_pred)
+
+    # calculate mean percentage error
+    mape = mean_absolute_percentage_error(y_test, y_test_pred)
 
     # calculate max absolute error
     max_error = np.max(np.abs(y_test - y_test_pred))
 
+    # calculate r^2 score
+    r2 = r2_score(y_test, y_test_pred)
+
+    # calculate adjusted r^2 score
+    adj_r2 = 1 - (1 - r2) * (len(y_test)-1)/(len(y_test) - features-1)
+
     # return a list of error values
-    return [mae, max_error]
+    return [mae, mape, max_error, r2, adj_r2]
 
 ################################################
 #                  Model 1
