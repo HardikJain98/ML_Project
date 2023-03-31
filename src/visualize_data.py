@@ -15,12 +15,12 @@
 
 # Outputs:
 # - Trip Data Visualizations
-#   - ../figs/TripB01.pdf
-#   - ../figs/TripB02.pdf
+#   - ../figs/TripB01.png
+#   - ../figs/TripB02.png
 # - Correlation Visualizations
-#   - ../figs/feature-correlation-matrix.pdf
-#   - ../figs/feature-correlation-with-temp.pdf
-#   - ../figs/pairplot.pdf
+#   - ../figs/feature-correlation-matrix.png
+#   - ../figs/feature-correlation-with-temp.png
+#   - ../figs/pairplot.png
 
 ################################################
 #                 Libraries
@@ -73,7 +73,7 @@ for trip in ['TripB01', 'TripB02']:
     axs1_2.set_ylabel('Battery Temperature [C]', color='red')
 
     fig.suptitle('Selected Features vs. Time for ' + trip + '.csv', fontsize=16)
-    plt.savefig(path_to_figs_dir + trip + '.pdf' , format='pdf', bbox_inches='tight')
+    plt.savefig(path_to_figs_dir + trip + '.png',  bbox_inches='tight')
 
 ################################################
 #         Correlation Visualizations
@@ -85,7 +85,7 @@ mask = np.triu(np.ones_like(df.corr(method='pearson', numeric_only=True), dtype=
 sns_plot1 = sns.heatmap(df.corr(method='pearson', numeric_only=True), mask=mask, vmin=-1, vmax=1, annot=False, cmap='BrBG', cbar_kws={'label': 'Pearson correlation'})
 sns_plot1.set_title('Pairwise Pearson Correlation Matrix', fontdict={'fontsize':12}, pad=16);
 # plt.show() # blocks execution
-sns_plot1.figure.savefig(path_to_figs_dir + 'feature-correlation-matrix.pdf', format='pdf', bbox_inches='tight')
+sns_plot1.figure.savefig(path_to_figs_dir + 'feature-correlation-matrix.png', bbox_inches='tight')
 
 # Pearson correlation between features and target, sorted
 print('Computing correlation of features with battery temperature...')
@@ -94,7 +94,7 @@ plt.figure(figsize=(8, 8))
 sns_plot2 = sns.heatmap(df.corr(method='pearson', numeric_only=True)[['Battery Temperature [C]']].sort_values(by='Battery Temperature [C]', ascending=False), vmin=-1, vmax=1, annot=True, cmap='BrBG', cbar_kws={'label': 'Pearson correlation'})
 sns_plot2.set_title('Pearson Correlation of Features with Battery Temperature', fontdict={'fontsize':12}, pad=16);
 # plt.show() # blocks execution
-sns_plot2.figure.savefig(path_to_figs_dir + 'feature-correlation-with-temp.pdf', format='pdf', bbox_inches='tight')
+sns_plot2.figure.savefig(path_to_figs_dir + 'feature-correlation-with-temp.png', bbox_inches='tight')
 
 # Pair plot to reveal nonlinear relationships
 # Sample a subset to keep the plotting tractable
