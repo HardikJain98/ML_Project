@@ -23,7 +23,7 @@
 # If other modules are needed, remember to update ml-project-env
 import pandas as pd
 import numpy as np
-from sklearn import linear_model, preprocessing
+from sklearn import linear_model, preprocessing, metrics
 
 ################################################
 #                  evaluate
@@ -47,8 +47,11 @@ def evaluate(y_test, y_test_pred):
     # calculate max absolute error
     max_error = np.max(np.abs(y_test - y_test_pred))
 
+    # calculate r^2 score
+    r2_error = metrics.r2_score(y_test, y_test_pred)
+
     # return a list of error values
-    return [mae, max_error]
+    return [mae, max_error, r2_error]
 
 ################################################
 #                  Model 1
