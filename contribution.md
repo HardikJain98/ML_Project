@@ -25,14 +25,14 @@ nav_order: 9
 
 ### Midterm
 
-| Tasks                                                              | Owner                                                   |
-| ------------------------------------------------------------------ | ------------------------------------------------------- |
-| Data Cleaning and Pre-processing                                   | Kartik Sastry                                           |
-| EDA and Data Visualization                                         | Kartik Sastry, Pearl Jain                               |
-| Model 1 - Linear Regression                                        | Kartik Sastry                                           |
-| Model 2 - Polynomial Regression                                    | Kartik Sastry                                           |
-| Model 3 - Polynomial Regression with feature selection using Lasso | Kartik Sastry                                           |
-| Principal Component Analysis                                       | Lakshmi Sree Lakshmanan                                 |
-| Error Metrics and Evaluation                                       | Kartik Sastry, Aravindhan Krishnan, Hardik Sraman Jain  |
-| MidTerm Documentation                                              | All                                                     |
-| MidTerm Document to GitHub Page                                    | Aravindhan Krishnan, Hardik Sraman Jain                 |
+| Tasks                                                              | Owner                                                                           |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| Data Cleaning and Pre-processing                                   | Kartik Sastry                                                                   |
+| EDA and Data Visualization                                         | Kartik Sastry, Pearl Jain                                                       |
+| Model 1 - Linear Regression                                        | Kartik Sastry                                                                   |
+| Model 2 - Polynomial Regression                                    | Kartik Sastry                                                                   |
+| Model 3 - Polynomial Regression with feature selection using Lasso | Kartik Sastry                                                                   |
+| Principal Component Analysis                                       | Lakshmi Sree Lakshmanan                                                         |
+| Error Metrics and Evaluation                                       | Kartik Sastry, Aravindhan Krishnan, Hardik Sraman Jain, Lakshmi Sree Lakshmanan |
+| MidTerm Documentation                                              | All                                                                             |
+| MidTerm Document to GitHub Page                                    | Aravindhan Krishnan, Hardik Sraman Jain                                         |
