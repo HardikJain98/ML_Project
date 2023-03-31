@@ -56,7 +56,7 @@ Further redundancies in the feature set may be revealed through an analysis of t
 ### Removal of Outliers
 A pairwise scatterplot visualization of the reduced dataset suggested the presence of outliers in heater and air conditioner power signals (see Figure 2). Further inspection of the dataset revealed that indeed, for a period of about five minutes during only one trip, the power consumption values reported by the heater and air conditioner were abnormally large (and invalid, beyond the physical capabilities of the devices). This small ‘blip’ in the dataset was discarded by applying a threshold to the heater power feature. The threshold value was obtained by computing the maximum value of heater power measured on all other trips except the one containing invalid data.
 
-![image](figs/pairplot.png)
+![image](figs/pair_plot_pre.png)
 <center><b> Figure 2: A Pairwise Scatterplot </b></center>
 
 <br/>
