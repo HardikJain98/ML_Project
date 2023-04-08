@@ -23,6 +23,7 @@
 ################################################
 import pandas as pd
 import numpy as np
+from sklearn.decomposition import PCA
 from models import model_1_train, model_1_predict, model_2_train, model_2_predict, model_3_train, model_3_predict, model_4_train, model_4_predict, evaluate
 import matplotlib.pyplot as plt
 
@@ -46,9 +47,27 @@ data = data.drop(columns=['trip_id'])
 data = data.to_numpy()
 
 # Split data into features (X) and target (y). Temperature is the last column!
-X = data[:, :-1]
+X_full = data[:, :-1]
 y = data[:, -1]
+######################
+#           PCA
+######################
+pca = PCA(n_components=2)
 
+pca.fit(X_full)
+variance = pca.explained_variance_ratio_
+for i in range(len(variance)):
+    print(f"Component {i+1}: {variance[i]*100:.2f}%")
+
+coefficients = pca.components_
+
+# Print the PCA coefficients of each component
+for i in range(len(coefficients)):
+    print(f"Component {i+1}: {coefficients[i]}")
+
+X = pca.transform(X_full)
+
+#print(X_full.shape,X.shape)
 ################################################
 #           K-Fold Cross Validation
 ################################################
