@@ -2,7 +2,7 @@
 layout: page
 title: Contribution
 permalink: /contribution
-nav_order: 9
+nav_order: 11
 ---
 
 # Core Temperature Estimation of Electric Vehicle Battery Packs
@@ -36,3 +36,12 @@ nav_order: 9
 | Error Metrics and Evaluation                                       | Kartik Sastry, Aravindhan Krishnan, Hardik Sraman Jain, Lakshmi Sree Lakshmanan |
 | MidTerm Documentation                                              | All                                                                             |
 | MidTerm Document to GitHub Page                                    | Aravindhan Krishnan, Hardik Sraman Jain                                         |
+
+### Finals
+
+| Tasks                              | Owner               |
+| ---------------------------------- | ------------------- |
+| Model 4 - Random Forest Regression | Aravindhan Krishnan |
+| Evaluation and Result Analysis     | Aravindhan Krishnan |
+| MidTerm Documentation              | All                 |
+| MidTerm Document to GitHub Page    | All                 |

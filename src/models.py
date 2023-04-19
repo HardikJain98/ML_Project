@@ -55,7 +55,7 @@ def evaluate(y_test, y_test_pred, features):
     r2 = r2_score(y_test, y_test_pred)
 
     # calculate adjusted r^2 score
-    adj_r2 = 1 - (1 - r2) * (len(y_test)-1)/(len(y_test) - features-1)
+    adj_r2 = 1 - (1 - r2) * (len(y_test)-1)/(len(y_test) - features - 1)
 
     # return a list of error values
     return [mae, mape, max_error, r2, adj_r2]
