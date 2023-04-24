@@ -1,12 +1,12 @@
 #!/bin/zsh
 # Run from cd /Users/kartiksastry/Dropbox\ \(GaTech\)/Gatech/CS\ 7641\ -\ Machine\ Learning/ML_Project/src
-#clear
+clear
 
 echo "########################################"
 echo "run.zsh: Activating conda environment"
 echo "########################################"
 # running "conda activate ml-project-env" from a shell requires some modification
-# source activate ml-project-env
+source activate ml-project-env
 echo "Done"
 echo ""
 

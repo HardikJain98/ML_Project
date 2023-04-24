@@ -33,6 +33,7 @@ data = data.drop(columns=["trip_id"])
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 
+# Replace '[' and ']' with '(' and ')' for XGBoost to run
 X.columns = X.columns.str.replace('[', '(').str.replace(']', ')').str.replace('<', '_').str.replace('>', '_')
 
 ################################################
@@ -42,10 +43,10 @@ def build_xgboost_params():
     # Split into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # create a Random Forest Regressor
+    # create a XGBoost Regressor
     xgb_model = xgb.XGBRegressor(objective="reg:linear", random_state=42)
 
-    # Define the search space
+    # Define the hyperparameter set
     params = {
         'min_child_weight': [5, 10, 15],
         'gamma': [0.2, 0.6, 1.0],
@@ -91,19 +92,19 @@ if os.path.exists(XGBOOST_PICKLE):
     X_test        = X.iloc[test_indices]
     y_test        = y.iloc[test_indices]
 else:
-    # Train the random forest regressor
+    # Train the XGBoost regressor
     X_train, y_train, X_test, y_test, grid_results = build_xgboost_params()
 
 
 ################################################
-#     Fetch or train the best rf regressor
+#     Fetch or train the best xgb regressor
 ################################################
 print('All results:', grid_results.cv_results_)
 print("Best hyperparameters:", grid_results.best_params_)
 print('Best estimator:', grid_results.best_score_)
 
 if os.path.exists(BEST_XGBOOST_PICKLE):
-    # If the best random forest model is saved, retreive
+    # If the best XGBoost model is saved, retreive
     with open(BEST_XGBOOST_PICKLE, "rb") as f:
         best_xgb = pickle.load(f)
 else:
