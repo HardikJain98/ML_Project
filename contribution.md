@@ -39,9 +39,11 @@ nav_order: 11
 
 ### Finals
 
-| Tasks                              | Owner               |
-| ---------------------------------- | ------------------- |
-| Model 4 - Random Forest Regression | Aravindhan Krishnan |
-| Evaluation and Result Analysis     | Aravindhan Krishnan |
-| MidTerm Documentation              | All                 |
-| MidTerm Document to GitHub Page    | All                 |
+| Tasks                                        | Owner               |
+| ---------------------------------------------| ------------------- |
+| Model 4 - Random Forest Regression           | Aravindhan Krishnan |
+| Model 4 - Evaluation and Result Analysis     | Aravindhan Krishnan |
+| Model 5 - XGBoost Regression                 | Hardik Sraman Jain  |
+| Model 5 - Evaluation and Result Analysis     | Hardik Sraman Jain  | 
+| Final Documentation                          | All                 |
+| Final Document to GitHub Page                | All                 |
