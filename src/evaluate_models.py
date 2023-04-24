@@ -30,6 +30,8 @@ from sklearn.decomposition import PCA
 
 from models import model_1_train, model_1_predict, model_2_train, model_2_predict, model_3_train, model_3_predict, model_4_train, model_4_predict, evaluate
 import matplotlib.pyplot as plt
+from sklearn.metrics import r2_score
+
 
 ################################################
 #     Relative Paths to Inputs/Outputs
@@ -104,7 +106,7 @@ for i in range(K):
     X_train = np.vstack((X[indices[:start]], X[indices[end:]]))
     y_train = np.concatenate((y[indices[:start]], y[indices[end:]]))
 
-    print(X_train.shape)
+    #print(X_train.shape)
     ################################################
     #           Train and Test Model 1
     ################################################
@@ -151,9 +153,27 @@ for i in range(K):
 
     # Test model 4 on test data
     y_test_pred = model_4_predict(model, X_test)
+    y_test=y_test.reshape(-1,1)
+    
 
     model_4_error_metrics.append(evaluate(y_test, y_test_pred))
-    model_4_errors = np.concatenate((model_4_errors, y_test-y_test_pred))
+    arr_2d=y_test-y_test_pred
+    arr_1d_flatten = arr_2d.flatten()
+
+    print(model_4_errors.shape)
+    print(arr_1d_flatten.shape)
+    model_4_errors = np.concatenate((model_4_errors,arr_1d_flatten))
+    y_test=y_test.flatten()
+    y_test_pred=y_test_pred.flatten()
+    r2 = r2_score(y_test, y_test_pred)
+    #print(r2)
+    n_predictors = X_test.shape[1]
+    n_samples = len(y_test)
+    adj_r2 = 1 - (1 - r2) * (n_samples - 1) / (n_samples - n_predictors - 1)
+
+    print("R2 score:", r2)
+    print("Adjusted R2 score:", adj_r2)
+
 ################################################
 #            Look At Error Metrics
 ################################################
@@ -208,6 +228,11 @@ ax[2].set_xlabel("Estimation Error [deg C]")
 ax[2].set_ylabel("Count")
 ax[2].set_title("Polynomial Regression w/ $\ell_1$ Penalty")
 
+
+ax[2].hist(model_4_errors, bins=20)
+ax[2].set_xlabel("Estimation Error [deg C]")
+ax[2].set_ylabel("Count")
+ax[2].set_title("Neural Network")
 # plt.show() # blocks execution
 fig.tight_layout()
 fig.savefig(path_to_figs_dir + 'errplot.png', format='png', bbox_inches='tight')
