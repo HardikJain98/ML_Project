@@ -27,7 +27,7 @@ http://localhost:4000
 * Jekyll is ready to use after this
 
 
-### Make changes to website and test it
+### Make changes to website and test it (run the below command from inside the Project folder)
 ```
 bundle update && bundle exec jekyll serve --config "_config.yml,_config_dev.yml"
 ```
