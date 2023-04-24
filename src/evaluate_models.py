@@ -24,6 +24,10 @@
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
+# import keras
+# from keras.models import Sequential
+# from keras.layers import Dense
+
 from models import model_1_train, model_1_predict, model_2_train, model_2_predict, model_3_train, model_3_predict, model_4_train, model_4_predict, evaluate
 import matplotlib.pyplot as plt
 
@@ -52,21 +56,21 @@ y = data[:, -1]
 ######################
 #           PCA
 ######################
-pca = PCA(n_components=2)
+# pca = PCA(n_components=2)
 
-pca.fit(X_full)
-variance = pca.explained_variance_ratio_
-for i in range(len(variance)):
-    print(f"Component {i+1}: {variance[i]*100:.2f}%")
+# pca.fit(X_full)
+# variance = pca.explained_variance_ratio_
+# for i in range(len(variance)):
+#     print(f"Component {i+1}: {variance[i]*100:.2f}%")
 
-coefficients = pca.components_
+# coefficients = pca.components_
 
-# Print the PCA coefficients of each component
-for i in range(len(coefficients)):
-    print(f"Component {i+1}: {coefficients[i]}")
+# # Print the PCA coefficients of each component
+# for i in range(len(coefficients)):
+#     print(f"Component {i+1}: {coefficients[i]}")
 
-X = pca.transform(X_full)
-
+# X = pca.transform(X_full)
+X=X_full
 #print(X_full.shape,X.shape)
 ################################################
 #           K-Fold Cross Validation
@@ -100,6 +104,7 @@ for i in range(K):
     X_train = np.vstack((X[indices[:start]], X[indices[end:]]))
     y_train = np.concatenate((y[indices[:start]], y[indices[end:]]))
 
+    print(X_train.shape)
     ################################################
     #           Train and Test Model 1
     ################################################
@@ -142,7 +147,13 @@ for i in range(K):
     ################################################
     #           Train and Test Model 4
     ################################################
+    model = model_4_train(X_train, y_train)
 
+    # Test model 4 on test data
+    y_test_pred = model_4_predict(model, X_test)
+
+    model_4_error_metrics.append(evaluate(y_test, y_test_pred))
+    model_4_errors = np.concatenate((model_4_errors, y_test-y_test_pred))
 ################################################
 #            Look At Error Metrics
 ################################################
@@ -168,13 +179,13 @@ print(np.array(model_3_error_metrics).T)
 print('Average Across Folds:')
 print(np.mean(np.array(model_3_error_metrics).T, axis=1))
 
-# print()
+print()
 
-# print('Model 4:')
-# print('Errors Per Fold:')
-# print(np.array(model_4_error_metrics).T)
-# print('Average Across Folds:')
-# print(np.mean(np.array(model_4_error_metrics).T, axis=1))
+print('Model 4:')
+print('Errors Per Fold:')
+print(np.array(model_4_error_metrics).T)
+print('Average Across Folds:')
+print(np.mean(np.array(model_4_error_metrics).T, axis=1))
 
 ################################################
 #            Look At Error Histograms
