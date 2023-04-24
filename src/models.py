@@ -27,6 +27,8 @@ from sklearn import linear_model, preprocessing
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.regularizers import l2
+
 ################################################
 #                  evaluate
 ################################################
@@ -228,19 +230,32 @@ def model_4_train(X_train, y_train):
         trained model object
         
     """
-    print(X_train.shape)
+    #print(X_train.shape)
     #scaler = preprocessing.StandardScaler().fit(X_train.copy())
     #transformer = preprocessing.PolynomialFeatures(degree=2)
 
+    # model = Sequential()
+    # model.add(Dense(32, input_dim=11, activation='relu'))
+    # model.add(Dense(16, activation='relu'))
+    # model.add(Dense(4, activation='relu'))
+
+    # model.add(Dense(1, activation='sigmoid'))
+
+    # # compile the model
+    # model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    # model.fit(X_train, y_train, epochs=1, batch_size=12)
+
     model = Sequential()
-    model.add(Dense(8, input_dim=11, activation='relu'))
-    model.add(Dense(4, activation='relu'))
-    model.add(Dense(1, activation='sigmoid'))
+    model.add(Dense(64, input_dim=11, activation='relu', kernel_regularizer=l2(0.01)))
+    model.add(Dense(32, activation='relu', kernel_regularizer=l2(0.01)))
+    model.add(Dense(1, activation='linear'))
 
-    # compile the model
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# compile the model
+    model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mse'])
 
-    model.fit(X_train, y_train, epochs=1, batch_size=36)
+# train the model
+    model.fit(X_train, y_train, epochs=5, batch_size=32, verbose=0)
 
     return model
 
