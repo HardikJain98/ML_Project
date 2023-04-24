@@ -24,7 +24,9 @@
 import pandas as pd
 import numpy as np
 from sklearn import linear_model, preprocessing
-
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
 ################################################
 #                  evaluate
 ################################################
@@ -224,8 +226,23 @@ def model_4_train(X_train, y_train):
 
     Return:
         trained model object
+        
     """
-    raise NotImplementedError
+    print(X_train.shape)
+    #scaler = preprocessing.StandardScaler().fit(X_train.copy())
+    #transformer = preprocessing.PolynomialFeatures(degree=2)
+
+    model = Sequential()
+    model.add(Dense(8, input_dim=11, activation='relu'))
+    model.add(Dense(4, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
+
+    # compile the model
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    model.fit(X_train, y_train, epochs=1, batch_size=36)
+
+    return model
 
 def model_4_predict(model_object, X_test):
     """
@@ -239,4 +256,10 @@ def model_4_predict(model_object, X_test):
         Y_est: length N numpy array of temperature values
             * let us agree to use force vectors into shape (N, ) instead of shape (N, 1) to avoid issues *
     """
-    raise NotImplementedError
+    # scaler = model_object[0]
+    # transformer = model_object[1]
+    # model = model_object[2]
+    # X_test_NN = transformer.fit_transform(scaler.transform(X_test.copy()))
+    y_pred = model_object.predict(X_test)
+    return y_pred
+
