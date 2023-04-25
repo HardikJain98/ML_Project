@@ -2,7 +2,7 @@
 layout: page
 title: Contribution
 permalink: /contribution
-nav_order: 11
+nav_order: 13
 ---
 
 # Core Temperature Estimation of Electric Vehicle Battery Packs
@@ -39,11 +39,17 @@ nav_order: 11
 
 ### Finals
 
-| Tasks                                        | Owner               |
-| ---------------------------------------------| ------------------- |
-| Model 4 - Random Forest Regression           | Aravindhan Krishnan |
-| Model 4 - Evaluation and Result Analysis     | Aravindhan Krishnan |
-| Model 5 - XGBoost Regression                 | Hardik Sraman Jain  |
-| Model 5 - Evaluation and Result Analysis     | Hardik Sraman Jain  | 
-| Final Documentation                          | All                 |
-| Final Document to GitHub Page                | All                 |
+| Tasks                                        | Owner                                          |
+| ---------------------------------------------| -----------------------------------------------|
+| Model 4 - Random Forest Regression           | Aravindhan Krishnan                            |
+| Model 4 - Evaluation and Result Analysis     | Aravindhan Krishnan                            |
+| Model 5 - XGBoost Regression                 | Hardik Sraman Jain                             |
+| Model 5 - Evaluation and Result Analysis     | Hardik Sraman Jain                             |   
+| Model 6 - Neural Networks                    | Lakshmi Sree Lakshmanan                        |
+| Model 6 - Evaluation and Result Analysis     | Lakshmi Sree Lakshmanan                        |
+| Results Comparison                           | Lakshmi Sree Lakshmanan, Hardik Sraman Jain    |
+| Discussion and Conclusion                    | Hardik Sraman Jain                             |
+| Final Documentation                          | All                                            |
+| Final Document to GitHub Page                | All                                            |
+| Proposal Document to Slides                  | Pearl Jain                                     |
+| Proposal Slides to Video Presentation        | Pearl Jain                                     |

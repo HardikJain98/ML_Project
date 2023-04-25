@@ -43,3 +43,16 @@ nav_order: 9
     * 'max_depth': [2, 5, 8]
 * Post fitting the search space, we got the following parameter as the best fit hyper-parameters:
     * Best hyper-parameters: {'min_child_weight': 5, 'gamma': 0.2, 'subsample': 1.0, 'colsample_bytree': 1.0, 'max_depth': 8, 'random_state': 42}
+
+
+### Model 6: Neural Network
+* We found that Random Forest and XGBoost models performed exceptionally well in predicting the temperature, with significantly small errors and nearly perfect R^2 values. 
+* However, we aimed to further improve the predictive accuracy by exploring more complex and computationally intensive models, such as Neural Networks.
+* To this end, we experimented with various neural network architectures and activation functions, and selected the model that yielded the minimum error. 
+    * We started with a 3-layer neural network, where the inner activation functions were set as "ReLU," and the last layer was set as "sigmoid." 
+    * We used mean square error (MSE) as the loss function, as it aligns with our evaluation metric.
+* The initial models produced negative R^2 values, indicating that the model was underfit and had a significantly high loss. Thus, we modified the neural network architecture by using a linear activation function for the last layer. 
+* We also tuned the training-related hyperparameters for batch gradient descent and ultimately settled on a batch size of 32 and the number of epochs equal to 5. The final Neural Network architecture that was trained is displayed in the figure below.
+
+![image](figs/NN_architecture.png)
+<center> <b> Figure 16: Neural Network Architecture </b> </center>
