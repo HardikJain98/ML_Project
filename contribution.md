@@ -48,7 +48,7 @@ nav_order: 13
 | Model 6 - Neural Networks                    | Lakshmi Sree Lakshmanan                        |
 | Model 6 - Evaluation and Result Analysis     | Lakshmi Sree Lakshmanan                        |
 | Results Comparison                           | Lakshmi Sree Lakshmanan, Hardik Sraman Jain    |
-| Discussion and Conclusion                    | Hardik Sraman Jain, Kartik Sastry.             |
+| Discussion and Conclusion                    | Hardik Sraman Jain, Kartik Sastry              |
 | Final Documentation                          | All                                            |
 | Final Document to GitHub Page                | All                                            |
 | Proposal Document to Slides                  | Pearl Jain                                     |
