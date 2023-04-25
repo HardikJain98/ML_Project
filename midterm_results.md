@@ -39,4 +39,4 @@ Figure 14 shows the residuals spread across the predicted values of battery temp
 ![image](figs/pca.png)
 <center> <b> Figure 15: PCA analysis </b> </center>
 
-From Figure 15, we observe that there is a significant increase in the mean as well as the max absolute errors. We conclude that PCA may not work well and optimize the prediction results for models Linear Regression, Polynomial Regression and Polynomial Regression with L1 penalty. We hope to incorporate PCA in our future models to be built.
+From Figure 15, we observe that there is a significant increase in the mean as well as the max absolute errors. We conclude that PCA may not work well and optimize the prediction results for models Linear Regression, Polynomial Regression and Polynomial Regression with L1 penalty. As a result, we have determined that the outcomes of PCA will not be utilized in any forthcoming model implementations.
