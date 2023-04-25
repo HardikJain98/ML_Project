@@ -35,6 +35,18 @@ python evaluate_models.py
 echo ""
 
 echo "########################################"
+echo "run.zsh: Evaluating Random Forest Regression Model"
+echo "########################################"
+python random_forest.py
+echo ""
+
+echo "########################################"
+echo "run.zsh: Evaluating XGBoost Regression Model"
+echo "########################################"
+python XGBoost.py
+echo ""
+
+echo "########################################"
 echo "run.zsh: Deactivating conda environment"
 echo "########################################"
 conda deactivate

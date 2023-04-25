@@ -19,3 +19,20 @@ http://localhost:4000
 * https://stackoverflow.com/a/68399131
 * https://github.com/just-the-docs/just-the-docs
 * https://just-the-docs.github.io/just-the-docs/
+
+
+### Steps for setting up page in Windows 10/11
+
+* Follow the steps (1-4) in the below link - https://jekyllrb.com/docs/installation/windows/
+* Jekyll is ready to use after this
+
+
+### Make changes to website and test it (run the below command from inside the Project folder)
+```
+bundle update && bundle exec jekyll serve --config "_config.yml,_config_dev.yml"
+```
+
+### Where to view the changes
+```
+http://localhost:4000
+```

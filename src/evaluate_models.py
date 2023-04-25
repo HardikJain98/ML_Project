@@ -31,7 +31,8 @@ from sklearn.decomposition import PCA
 from models import model_1_train, model_1_predict, model_2_train, model_2_predict, model_3_train, model_3_predict, model_4_train, model_4_predict, evaluate
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
-
+import seaborn as sns
+import statsmodels.api as sm
 
 ################################################
 #     Relative Paths to Inputs/Outputs
@@ -97,6 +98,9 @@ model_1_errors = np.array([])
 model_2_errors = np.array([])
 model_3_errors = np.array([])
 model_4_errors = np.array([])
+model_1_predictions = np.array([])
+model_2_predictions = np.array([])
+model_3_predictions = np.array([])
 for i in range(K):
     ################################################
     #       Get Testing / Training Data
@@ -112,39 +116,45 @@ for i in range(K):
     ################################################
     # Train model 1 on training data
     model = model_1_train(X_train, y_train)
+    features = len(model.coef_[model.coef_ != 0])
 
     # Test model 1 on test data
-    y_test_pred = model_1_predict(model, X_test)
+    model1_y_test_pred = model_1_predict(model, X_test)
 
     # Evaluate model performance
-    model_1_error_metrics.append(evaluate(y_test, y_test_pred))
-    model_1_errors = np.concatenate((model_1_errors, y_test-y_test_pred))
+    model_1_error_metrics.append(evaluate(y_test, model1_y_test_pred, features))
+    model_1_errors = np.concatenate((model_1_errors, y_test - model1_y_test_pred))
+    model_1_predictions = np.concatenate((model_1_predictions, model1_y_test_pred))
 
     ################################################
     #           Train and Test Model 2
     ################################################
     # Train model 2 on training data
     model = model_2_train(X_train, y_train)
+    features = len(model[-1].coef_[model[-1].coef_ != 0])
 
     # Test model 2 on test data
-    y_test_pred = model_2_predict(model, X_test)
+    model2_y_test_pred = model_2_predict(model, X_test)
 
     # Evaluate model performance
-    model_2_error_metrics.append(evaluate(y_test, y_test_pred))
-    model_2_errors = np.concatenate((model_2_errors, y_test-y_test_pred))
+    model_2_error_metrics.append(evaluate(y_test, model2_y_test_pred, features))
+    model_2_errors = np.concatenate((model_2_errors, y_test - model2_y_test_pred))
+    model_2_predictions = np.concatenate((model_2_predictions, model2_y_test_pred))
 
     ################################################
     #           Train and Test Model 3
     ################################################
     # Train model 3 on training data
     model = model_3_train(X_train, y_train)
+    features = len(model[-1].coef_[model[-1].coef_ != 0])
 
     # Test model 3 on test data
-    y_test_pred = model_3_predict(model, X_test)
+    model3_y_test_pred = model_3_predict(model, X_test)
 
     # Evaluate model performance
-    model_3_error_metrics.append(evaluate(y_test, y_test_pred))
-    model_3_errors = np.concatenate((model_3_errors, y_test-y_test_pred))
+    model_3_error_metrics.append(evaluate(y_test, model3_y_test_pred, features))
+    model_3_errors = np.concatenate((model_3_errors, y_test - model3_y_test_pred))
+    model_3_predictions = np.concatenate((model_3_predictions, model3_y_test_pred))
 
     ################################################
     #           Train and Test Model 4
@@ -211,7 +221,7 @@ print(np.mean(np.array(model_4_error_metrics).T, axis=1))
 #            Look At Error Histograms
 ################################################
 # Create a 1x3 grid of subplots
-fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(15, 3))
+fig, ax = plt.subplots(nrows=1, ncols=4, figsize=(15, 3))
 
 ax[0].hist(model_1_errors, bins=20)
 ax[0].set_xlabel("Estimation Error [deg C]")
@@ -228,11 +238,56 @@ ax[2].set_xlabel("Estimation Error [deg C]")
 ax[2].set_ylabel("Count")
 ax[2].set_title("Polynomial Regression w/ $\ell_1$ Penalty")
 
-
-ax[2].hist(model_4_errors, bins=20)
-ax[2].set_xlabel("Estimation Error [deg C]")
-ax[2].set_ylabel("Count")
-ax[2].set_title("Neural Network")
+ax[3].hist(model_4_errors, bins=20)
+ax[3].set_xlabel("Estimation Error [deg C]")
+ax[3].set_ylabel("Count")
+ax[3].set_title("Neural Network")
 # plt.show() # blocks execution
 fig.tight_layout()
 fig.savefig(path_to_figs_dir + 'errplot.png', format='png', bbox_inches='tight')
+plt.close()
+
+################################################
+#            Look At Residual Plots
+################################################
+# Create a 1x3 grid of subplots
+fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(20, 5))
+
+sns.residplot(x=model_1_predictions, y=data[:((N // K) * K), -1], data=data[:(N // K) * K], ax=ax[0])
+ax[0].set_xlabel("Estimated Temperature [deg C]")
+ax[0].set_ylabel("Residuals")
+ax[0].set_title("Linear Regression")
+
+sns.residplot(x=model_2_predictions, y=data[:((N // K) * K), -1], data=data[:(N // K) * K], ax=ax[1])
+ax[1].set_xlabel("Estimated Temperature [deg C]")
+ax[1].set_ylabel("Residuals")
+ax[1].set_title("Polynomial Regression")
+
+sns.residplot(x=model_3_predictions, y=data[:((N // K) * K), -1], data=data[:(N // K) * K], ax=ax[2])
+ax[2].set_xlabel("Estimated Temperature [deg C]")
+ax[2].set_ylabel("Residuals")
+ax[2].set_title("Polynomial Regression w/ $\ell_1$ Penalty")
+
+
+fig.tight_layout()
+fig.savefig(path_to_figs_dir + 'residualplot.png', format='png', bbox_inches='tight')
+plt.close()
+
+################################################
+#            Look At QQ Plot
+################################################
+# Create a 1x3 grid of subplots
+fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(20, 5))
+
+sm.qqplot(model_1_errors, line='45', ax = ax[0])
+ax[0].set_title("Linear Regression")
+
+sm.qqplot(model_2_errors, line='45', ax = ax[1])
+ax[1].set_title("Polynomial Regression")
+
+sm.qqplot(model_3_errors, line='45', ax = ax[2])
+ax[2].set_title("Polynomial Regression w/ $\ell_1$ Penalty")
+
+fig.tight_layout()
+fig.savefig(path_to_figs_dir + 'qqplot.png', format='png', bbox_inches='tight')
+plt.close()
