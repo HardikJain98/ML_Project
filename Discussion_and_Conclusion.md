@@ -27,6 +27,12 @@ We observe the following from the above comparison of the evaluation metrics:
 * The Linear and Polynomial Regression models perform the worst with higher Mean Absolute Error (2.342 and 1.879 respectively) and lower R^2 Score (84.47% and 89 92% respectively).
 * The Polynomial Regression model with L1 penalty exhibits a slightly higher Mean Absolute Error of 2.936 and a lower R^2 Score of 74.73% compared to the other Polynomial Regression model as the model with L1 penalty only had 4 significant features. This suggests that the L1 penalty has limited the model's ability to capture the underlying relationship between the predictors and the target variable, leading to a less accurate prediction performance. 
 
+Random forests and XGBoost outperform polynomial regression because of they can inherently represent a wider class of complex and nonlinear relationships, such as the relationship between battery temperature and our chosen predictors. The complex nonlinearity that the RF/XGBoost models learned is most-likely the quantization of temperature (i.e. rounding of measurements to the nearest degree). Quantization is a staircase-like nonlinear effect which limits the best-case estimation error of linear regression models to the quantization step size (in our case, to 1 degree). Polynomial models can achieve lower errors, but this requires high-degree polynomials which are prone to overfitting and wild end behavior.
+
+This concept is illustrated via a one-dimensional example in Figure 21. A linear regression model, four polynomial regression models (of degree 5, 10, 15, and 20), and a bagged random forest model (500 trees) are fit to synthetic data generated from the underlying function $y = \mathrm{round}(x)$, which exhibits a staircase nonlinearity. As expected, the linear model yields a consistently high estimation error. For polynomial models, goodness-of-fit improves as polynomial degree increases, but oscillations also appear between datapoints, and end behavior goes wild. The random forest does not have either the problems associated with linear and polynomial models, resulting in a fit with low average and worst-case errors!
+
+![image](figs/regression_example.png)
+<center> <b> Figure 21: Performance of linear, polynomial, and random forest regression on a dataset exhibiting a staircase nonlinearity.</b> </center>
 
 ## Conclusion
 <br/>
