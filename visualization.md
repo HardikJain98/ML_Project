@@ -21,7 +21,7 @@ The reduced-size dataset is amenable to visualization. Several figures are prese
 <center><b> Figure 4: Pearson correlation between features in the reduced dataset </b></center>
 <br/>
 
-* Further from Figure 5, we see that (relative) time has negligible correlation with the Battery Temperature [C] feature (target variable), and thus we can afford to work with this data without considering it as a time-series.
+* We chose to treat the regression to model instantaneous Battery Temperature [C] (target variable). This is further substantiated by the negligible correlation of relative time with the target variable as seen in Figure 5.
 ![image](figs/feature-correlation-with-temp.png)
 <center><b> Figure 5: Pearson correlation between features in the reduced dataset and battery temperature </b></center>
 ![image](figs/heatmap.png)
